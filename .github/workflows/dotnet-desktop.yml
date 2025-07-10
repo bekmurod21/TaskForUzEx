@@ -7,7 +7,7 @@ on:
 env:
   API_IMAGE_NAME: taskforuzex-backend
   API_CONTAINER_NAME: taskforuzex-backend
-  API_PORT: 83:8080
+  API_PORT: 82:8080
 
   REPO_NAME: ${{ github.repository }}  # Original repo name, e.g., bekmurod21/Tanqidchi
   LOWERCASE_REPO_NAME: bekmurod21/taskforuzex  # Manually set lowercase repo name
