@@ -2,6 +2,7 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using TaskForUzEx.Api.Models.Validations;
 using TaskForUzEx.Application.UseCases.AboutUsers.Commands;
 
 namespace TaskForUzEx.Api.Controllers;
@@ -13,12 +14,16 @@ public class AuthController(IMediator mediator) : ControllerBase
     [HttpPost("sign-in")]
     public async Task<IActionResult> SignInAsync([FromBody] SignInUserCommand command,CancellationToken cancellationToken = default)
     {
+        if(command.Password.IsStrong().IsValid is false)
+            return BadRequest(command.Password.IsStrong().Message);
         var result = await mediator.Send(command,cancellationToken);
         return Ok(result);
     }
     [HttpPost("sign-up")]
     public async Task<IActionResult> SignUpAsync([FromBody] SignUpUserCommand command,CancellationToken cancellationToken = default)
     {
+        if(command.Password.IsStrong().IsValid is false)
+            return BadRequest(command.Password.IsStrong().Message);
         var result = await mediator.Send(command,cancellationToken);
         if (result)
             return Ok(result);
