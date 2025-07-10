@@ -1,0 +1,6 @@
+@TaskForUzEx.Api_HostAddress = http://localhost:5163
+
+GET {{TaskForUzEx.Api_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
